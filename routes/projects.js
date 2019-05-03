@@ -14,4 +14,18 @@ router.post("/", (req, res) => {
     });
 });
 
+router.get("/:id/actions", (res, req) => {
+  const { id } = req.params;
+  db("actions")
+    .where({ project_id: id })
+    .then(actions => {
+      return res.status(200).json(actions);
+    })
+    .catch(err => {
+      return res
+        .status(404)
+        .json({ error: "Actions could not be found for that project." });
+    });
+});
+
 module.exports = router;
