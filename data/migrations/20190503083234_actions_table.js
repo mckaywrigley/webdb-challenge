@@ -4,6 +4,12 @@ exports.up = function(knex, Promise) {
     tbl.text("description");
     tbl.text("notes");
     tbl.boolean("completed").defaultTo(false);
+    tbl
+      .integer("project_id")
+      .references("id")
+      .inTable("projects")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
   });
 };
 
