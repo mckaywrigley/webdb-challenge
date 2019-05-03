@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.get("/:id/actions", (res, req) => {
+router.get("/:id/actions", (req, res) => {
   const { id } = req.params;
   db("actions")
     .where({ project_id: id })
