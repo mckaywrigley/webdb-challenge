@@ -24,4 +24,16 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  db("actions")
+    .where({ id })
+    .then(action => {
+      return res.status(200).json(action);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Action could not be found." });
+    });
+});
+
 module.exports = router;
