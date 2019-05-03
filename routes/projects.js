@@ -50,4 +50,17 @@ router.get("/:id/actions", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  db("projects")
+    .where({ id })
+    .update(req.body)
+    .then(project => {
+      return res.status(200).json(project);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Project could not be updated." });
+    });
+});
+
 module.exports = router;
