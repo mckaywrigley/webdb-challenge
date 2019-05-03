@@ -36,4 +36,17 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  db("actions")
+    .where({ id })
+    .update(req.body)
+    .then(action => {
+      return res.status(200).json(action);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Action could not be updated." });
+    });
+});
+
 module.exports = router;
