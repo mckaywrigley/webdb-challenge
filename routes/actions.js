@@ -14,4 +14,14 @@ router.post("/", (req, res) => {
     });
 });
 
+router.get("/", (req, res) => {
+  db("actions")
+    .then(actions => {
+      return res.status(200).json(actions);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Actions could not be found." });
+    });
+});
+
 module.exports = router;
