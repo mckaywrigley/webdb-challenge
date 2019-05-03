@@ -49,4 +49,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/id", (req, res) => {
+  const { id } = req.params;
+  db("actions")
+    .where({ id })
+    .del()
+    .then(action => {
+      return res.status(204).json(action);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Action could not be deleted." });
+    });
+});
+
 module.exports = router;
