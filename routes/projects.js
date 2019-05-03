@@ -24,6 +24,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  db("projects")
+    .where({ id })
+    .then(project => {
+      return res.status(200).json(project);
+    })
+    .catch(err => {
+      return res.status(404).json({ error: "Project could not be found." });
+    });
+});
+
 router.get("/:id/actions", (req, res) => {
   const { id } = req.params;
   db("actions")
